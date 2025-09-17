@@ -5,6 +5,10 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: #ffcdcd;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
 }
 
 /* Login centrado */
@@ -46,60 +50,7 @@ body {
   min-height: 24px;
 }
 
-/* --- Sobre --- */
-/* .sobre {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  margin: 100px auto;
-  background: #f7dc6f;
-  border: 2px solid #b7950b;
-  border-radius: 5px;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-/* Tapa del sobre 
-.tapa {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #f4d03f;
-  clip-path: polygon(0 0, 100% 0, 50% 50%);
-  transition: transform 1s;
-}
-
-/* Carta 
-.carta {
-  display: none;
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  width: 280px;
-  height: 160px;
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  animation: subir 1s forwards;
-}
-@keyframes subir {
-  from { transform: translateY(80px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-} */
-
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: sans-serif;
-  margin: 0;
-  overflow: hidden; 
-}
-
+/* --- Carta Principal --- */
 .envelope-wrapper {
   position: relative;
   width: 300px;
@@ -147,10 +98,12 @@ body {
   opacity: 0;
   z-index: 1;
   transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+  overflow-y: auto; /* Permite el scroll si el texto es muy largo */
 }
 
+/* --- Animación de apertura de la carta --- */
 .envelope-wrapper.open {
-  width: 450px; /* Tamaño final del contenedor */
+  width: 450px;
   height: 600px;
 }
 
@@ -168,40 +121,84 @@ body {
   opacity: 1;
 }
 
-
+/* --- Estilos del Botón --- */
 .letter button {
-  /* Posicionamiento y diseño del botón */
-  display: block; /* Ocupa su propia línea */
-  margin: 20px auto 0; /* Centra el botón y añade un margen superior */
-  padding: 12px 24px; /* Relleno interior para hacerlo más grande */
-  background-color: #ff6498; /* Color de fondo, a juego con la carta */
-  color: #fff; /* Color del texto */
+  display: block;
+  margin: 20px auto 0;
+  padding: 12px 24px;
+  background-color: #ff6498;
+  color: #fff;
   font-size: 1.1rem;
   font-weight: bold;
   border: none;
-  border-radius: 50px; /* Bordes redondeados para un estilo de "píldora" */
+  border-radius: 50px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-/* Efecto al pasar el mouse */
 .letter button:hover {
-  background-color: #77df00; /* Color más claro al pasar el mouse */
-  transform: translateY(-3px); /* Eleva el botón ligeramente */
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Aumenta la sombra */
+  background-color: #77df00;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Efecto al hacer clic (opcional) */
 .letter button:active {
-  transform: translateY(0); /* Vuelve a la posición original */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Restaura la sombra */
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/*Tipografia carta*/
+/* --- Tipografía --- */
 .letter p {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(1rem, 2vw, 1.4rem);
   text-align: center;
   color: #333;
+}
+
+/* ==================================== */
+/* === MEDIA QUERIES PARA RESPONSIVIDAD === */
+/* ==================================== */
+
+/* Dispositivos con un ancho máximo de 768px (tablets y móviles) */
+@media (max-width: 768px) {
+  /* Reducir el tamaño del sobre y de la carta */
+  .envelope-wrapper {
+    width: 250px;
+    height: 160px;
+  }
+
+  /* Ajustar la animación del sobre para que coincida con el nuevo tamaño */
+  .envelope-wrapper.open {
+    width: 320px;
+    height: 450px;
+  }
+}
+
+/* Dispositivos con un ancho máximo de 480px (móviles pequeños) */
+@media (max-width: 480px) {
+  /* Reducir aún más el tamaño de la carta y el sobre */
+  .envelope-wrapper {
+    width: 220px;
+    height: 140px;
+  }
+
+  .envelope-wrapper.open {
+    width: 280px;
+    height: 400px;
+  }
+
+  /* Reducir el tamaño de la fuente para que se ajuste mejor */
+  .letter p {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  }
+  
+  /* Ajustar el padding y el tamaño del botón */
+  .letter {
+    padding: 20px;
+  }
+  .letter button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
 }
